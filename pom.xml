@@ -19,7 +19,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>camel-restlet-http-mock-b</artifactId>
+    <artifactId>camel-restlet-http-mock</artifactId>
     <groupId>de.p7s1.de</groupId>
     <version>0.0.1</version>
     
