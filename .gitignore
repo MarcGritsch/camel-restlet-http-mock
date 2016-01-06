@@ -1,2 +1,3 @@
 /target/
 cumulus-mock.log
+camel-restlet-http-mock.log
