@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>camel-restlet-http-mock</artifactId>
-    <groupId>de.p7s1.de</groupId>
+    <groupId>de.mgr.de</groupId>
     <version>0.0.1</version>
     
     <packaging>war</packaging>
