@@ -81,6 +81,34 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.13</version>
         </dependency>
+        
+        
+        <!-- Testing -->
+        <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-test</artifactId>
+	        <version>4.2.4.RELEASE</version>
+            <scope>test</scope>	        
+        </dependency>        
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>  
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>2.16.1</version>
+            <scope>test</scope>
+        </dependency>               
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>2.16.1</version>
+            <scope>test</scope>     
+        </dependency>      
+              
     </dependencies>
 
     <build>
