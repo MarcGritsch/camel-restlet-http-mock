@@ -1,8 +1,5 @@
 package de.mgr.ws;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
@@ -16,11 +13,10 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 
-public class AbstractIntegrationTest extends CamelSpringTestSupport {
+public class MockEndpointTest extends CamelSpringTestSupport {
 
     @Override
     protected AbstractApplicationContext createApplicationContext() {
-        // must create application context with refrehs = false when using active profiles
         return new ClassPathXmlApplicationContext(new String[]{"classpath:/camel-context-test.xml"}, false);
     }
 
@@ -59,5 +55,27 @@ public class AbstractIntegrationTest extends CamelSpringTestSupport {
         MockEndpoint.assertIsSatisfied(camelContext);
         String responseCode = exchange.getIn().getHeader("CamelHttpResponseCode").toString();
         assertEquals(responseCode,"200");
+    }
+
+    @Test
+    public void get201() throws Exception {
+    	CamelContext camelContext = this.context();
+        MockEndpoint.resetMocks(camelContext);
+        get201.sendBody("get201");
+        Exchange exchange = mockOut.getExchanges().get(0);
+        MockEndpoint.assertIsSatisfied(camelContext);
+        String responseCode = exchange.getIn().getHeader("CamelHttpResponseCode").toString();
+        assertEquals(responseCode,"201");
+    }
+    
+    @Test
+    public void post201() throws Exception {
+    	CamelContext camelContext = this.context();
+        MockEndpoint.resetMocks(camelContext);
+        post201.sendBody("post201");
+        Exchange exchange = mockOut.getExchanges().get(0);
+        MockEndpoint.assertIsSatisfied(camelContext);
+        String responseCode = exchange.getIn().getHeader("CamelHttpResponseCode").toString();
+        assertEquals(responseCode,"201");
     }
 }
