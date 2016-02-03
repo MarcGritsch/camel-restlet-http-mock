@@ -3,6 +3,10 @@ package de.mgr.ws;
 
 import static org.junit.Assert.*;
 
+
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.apache.camel.CamelContext;
@@ -11,7 +15,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
-import org.apache.camel.test.spring.CamelSpringTestSupport;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +28,9 @@ public class MockEndpointTest {
 	
     @Autowired
     protected CamelContext camelContext;
-
+    
     @Autowired
-    private DataSource dataSource;
+    protected DataSource dataSource;
 
     @Produce(uri = "direct:mockGet200")
     protected ProducerTemplate get200;
@@ -39,7 +42,10 @@ public class MockEndpointTest {
     protected ProducerTemplate post200;    
     
     @Produce(uri = "direct:mockPost201")
-    protected ProducerTemplate post201;    
+    protected ProducerTemplate post201;  
+    
+    @Produce(uri = "direct:mockCountEntities")
+    protected ProducerTemplate countEntities;
     
     @EndpointInject(uri = "mock:mockOut")
     protected MockEndpoint mockOut;
@@ -82,5 +88,17 @@ public class MockEndpointTest {
         MockEndpoint.assertIsSatisfied(camelContext);
         String responseCode = exchange.getIn().getHeader("CamelHttpResponseCode").toString();
         assertEquals(responseCode,"201");
+    }
+    
+    
+    @Test
+    public void countEntities() throws Exception {
+        MockEndpoint.resetMocks(camelContext);
+        countEntities.sendBody("countEntities");
+        Exchange exchange = mockOut.getExchanges().get(0);
+        List<LinkedHashMap> result = (List<LinkedHashMap>) exchange.getIn().getBody();
+        Integer count = (Integer) result.get(0).get("COUNT");
+        MockEndpoint.assertIsSatisfied(camelContext);
+        assertTrue(count.intValue() == 1);
     }
 }

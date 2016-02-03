@@ -54,5 +54,12 @@ limitations under the License.
             <to uri="mock:mockOut"/>
         </route>
         
+        <route>
+            <from uri="direct:mockCountEntities"/>
+            <to uri="direct:countEntities"/>
+            <to uri="mock:mockOut"/>
+        </route>
+        
+        
     </camelContext>
 </beans>

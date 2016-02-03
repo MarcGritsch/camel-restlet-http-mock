@@ -76,5 +76,13 @@ limitations under the License.
             </setHeader>
         </route>
         
+        <route>
+            <from uri="direct:countEntities"/>
+            <setBody>
+                <constant>select count(1) as count from entity</constant>
+            </setBody>
+            <to uri="jdbc:dataSource"/>
+        </route>
+        
     </routeContext>
 </beans>
